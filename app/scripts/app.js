@@ -19,5 +19,6 @@ angular.module('tomTomApp', [
     'ngTouch',
     'firebase',
     'firebase.utils',
-    'simpleLogin'
+    'simpleLogin',
+    'ui.bootstrap'
   ]);
