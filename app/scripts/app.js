@@ -20,5 +20,6 @@ angular.module('tomTomApp', [
     'firebase',
     'firebase.utils',
     'simpleLogin',
-    'ui.bootstrap'
+    'ui.bootstrap',
+    'ui.router'
   ]);

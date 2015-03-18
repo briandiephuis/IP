@@ -55,34 +55,65 @@ angular.module('tomTomApp')
 
   // configure views; the authRequired parameter is used for specifying pages
   // which should only be available while logged in
-  .config(['$routeProvider', function($routeProvider) {
-    $routeProvider
-      .when('/', {
-        templateUrl: 'views/main.html',
-        controller: 'MainCtrl'
-      })
+  // .config(['$routeProvider', function($routeProvider) {
+  //   $routeProvider
+  //     .when('/', {
+  //       templateUrl: 'views/main.html',
+  //       controller: 'MainCtrl'
+  //     })
 
-      .when('/login', {
-        templateUrl: 'views/login.html',
-        controller: 'LoginCtrl'
-      })
+  //     .when('/login', {
+  //       templateUrl: 'views/login.html',
+  //       controller: 'LoginCtrl'
+  //     })
 
-      .when('/chat', {
-        templateUrl: 'views/chat.html',
-        controller: 'ChatCtrl'
-      })
+  //     .when('/chat', {
+  //       templateUrl: 'views/chat.html',
+  //       controller: 'ChatCtrl'
+  //     })
 
-      .whenAuthenticated('/account', {
-        templateUrl: 'views/account.html',
-        controller: 'AccountCtrl'
-      })
+  //     .whenAuthenticated('/account', {
+  //       templateUrl: 'views/account.html',
+  //       controller: 'AccountCtrl'
+  //     })
 
-      .when('/chat', {
-        templateUrl: 'views/chat.html',
-        controller: 'ChatCtrl'
-      })
-      .otherwise({redirectTo: '/'});
-  }])
+  //     .when('/chat', {
+  //       templateUrl: 'views/chat.html',
+  //       controller: 'ChatCtrl'
+  //     })
+  //     .otherwise({redirectTo: '/'});
+  // }])
+
+  .config(function($stateProvider, $urlRouterProvider){
+      
+      // For any unmatched url, send to /route1
+      $urlRouterProvider.otherwise('/planning');
+      
+      $stateProvider
+        .state('planning', {
+            url: '/planning',
+            templateUrl: 'views/planning/index.html'
+        })
+          .state('planning.dashboard', {
+              url: '/dashboard',
+              templateUrl: 'views/planning/dashboard.html',
+              controller: function($scope){
+                $scope.items = ['A', 'List', 'Of', 'Items'];
+              }
+          })
+          
+        .state('route2', {
+            url: '/route2',
+            templateUrl: 'route2.html'
+        })
+          .state('route2.list', {
+              url: '/list',
+              templateUrl: 'route2.list.html',
+              controller: function($scope){
+                $scope.things = ['A', 'Set', 'Of', 'Things'];
+              }
+          });
+    })
 
   /**
    * Apply some route security. Any route's resolve method can reject the promise with
