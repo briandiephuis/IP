@@ -8,8 +8,10 @@
  * Controller of the tomTomApp
  */
 angular.module('tomTomApp')
-  .controller('NavbarTopLinksCtrl', function ($scope) {
+  .controller('NavbarTopLinksCtrl', function ($scope, simpleLogin) {
 
   		$scope.messages = [];
+
+  		$scope.logout = simpleLogin.logout;
 
   });

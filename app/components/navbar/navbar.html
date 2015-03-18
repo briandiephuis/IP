@@ -32,20 +32,20 @@
     </li>
 
     <!-- user/authentication -->
-    <li ng-hide-auth="">
+    <li>
         <a href="#/login"><i class="fa fa-user fa-fw"></i> log in</a>
     </li>
-    <li class="dropdown" dropdown on-toggle="toggled(open)" ng-show-auth="">
+    <li class="dropdown" dropdown on-toggle="toggled(open)">
         <a href class="dropdown-toggle" dropdown-toggle>
             <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
         </a>
         <ul class="dropdown-menu">
-            <li><a href="#"><i class="fa fa-user fa-fw"></i> User Profile</a>
+            <li><a ng-href="account"><i class="fa fa-user fa-fw"></i> User Profile</a>
             </li>
-            <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
-            </li>
+            <!-- <li><a href="settings"><i class="fa fa-gear fa-fw"></i> Settings</a>
+            </li> -->
             <li class="divider"></li>
-            <li><a href="login.html"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+            <li><a href="#" ng-click="logout()"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
             </li>
         </ul>
     </li>
