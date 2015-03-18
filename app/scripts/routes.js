@@ -94,7 +94,8 @@ angular.module('tomTomApp')
         .state('projects', {
             url: '/projects',
             abstract: true,
-            templateUrl: 'views/projects/index.html'
+            templateUrl: 'views/projects/index.html',
+            controller: 'ProjectsCtrl'
         })
           .state('projects.dashboard', {
               url: '/dashboard',
