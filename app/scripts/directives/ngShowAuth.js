@@ -23,6 +23,8 @@ angular.module('tomTomApp')
           // sometimes if ngCloak exists on same element, they argue, so make sure that
           // this one always runs last for reliability
           $timeout(function () {
+            console.log('Update:');
+            console.log(isLoggedIn);
             el.toggleClass('ng-cloak', !isLoggedIn);
           }, 0);
         }
