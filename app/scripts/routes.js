@@ -87,16 +87,44 @@ angular.module('tomTomApp')
   .config(function($stateProvider, $urlRouterProvider){
       
       // For any unmatched url, send to /route1
-      $urlRouterProvider.otherwise('/planning');
+      $urlRouterProvider.otherwise('/');
       
       $stateProvider
+
+        .state('projects', {
+            url: '/projects',
+            abstract: true,
+            templateUrl: 'views/projects/index.html'
+        })
+          .state('projects.dashboard', {
+              url: '/dashboard',
+              templateUrl: 'views/projects/dashboard.html',
+              controller: function($scope){
+                $scope.items = ['A', 'List', 'Of', 'Items'];
+              }
+          })
+
         .state('planning', {
             url: '/planning',
+            abstract: true,
             templateUrl: 'views/planning/index.html'
         })
           .state('planning.dashboard', {
               url: '/dashboard',
               templateUrl: 'views/planning/dashboard.html',
+              controller: function($scope){
+                $scope.items = ['A', 'List', 'Of', 'Items'];
+              }
+          })
+
+        .state('knowledge', {
+            url: '/knowledge',
+            abstract: true,
+            templateUrl: 'views/knowledge/index.html'
+        })
+          .state('knowledge.dashboard', {
+              url: '/dashboard',
+              templateUrl: 'views/knowledge/dashboard.html',
               controller: function($scope){
                 $scope.items = ['A', 'List', 'Of', 'Items'];
               }
@@ -112,7 +140,17 @@ angular.module('tomTomApp')
               controller: function($scope){
                 $scope.things = ['A', 'Set', 'Of', 'Things'];
               }
-          });
+          })
+        .state('login', {
+            url: '/login',
+            templateUrl: 'views/login.html',
+            controller: 'LoginCtrl'
+        })
+        .state('account', {
+            url: '/account',
+            templateUrl: 'views/account.html',
+            controller: 'AccountCtrl'
+        });
     })
 
   /**

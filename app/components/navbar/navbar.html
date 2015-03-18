@@ -11,9 +11,9 @@
 <!-- /.navbar-header -->
 
 <ul class="nav navbar-top-links navbar-left" ng-controller="NavbarTopLinksCtrl">
-    <li><a href="#" ui-sref="projects">Projects</a></li>
-    <li><a href="#" ui-sref="planning">Planning</a></li>
-    <li><a href="#" ui-sref="knowledge">Company knowledge</a></li>
+    <li><a href="#" ui-sref="projects.dashboard">Projects</a></li>
+    <li><a href="#" ui-sref="planning.dashboard">Planning</a></li>
+    <li><a href="#" ui-sref="knowledge.dashboard">Company knowledge</a></li>
 </ul>
 
 <ul class="nav navbar-top-links navbar-right" ng-controller="NavbarTopLinksCtrl">
@@ -39,14 +39,14 @@
 
     <!-- user/authentication -->
     <li>
-        <a href="#/login"><i class="fa fa-user fa-fw"></i> log in</a>
+        <a ui-sref="login"><i class="fa fa-user fa-fw"></i> log in</a>
     </li>
     <li class="dropdown" dropdown on-toggle="toggled(open)">
         <a href class="dropdown-toggle" dropdown-toggle>
             <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
         </a>
         <ul class="dropdown-menu">
-            <li><a ng-href="account"><i class="fa fa-user fa-fw"></i> User Profile</a>
+            <li><a ui-sref="account"><i class="fa fa-user fa-fw"></i> User Profile</a>
             </li>
             <!-- <li><a href="settings"><i class="fa fa-gear fa-fw"></i> Settings</a>
             </li> -->
