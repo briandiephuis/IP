@@ -1,1 +1,16 @@
-<h1>Projects Dashboard</h1>
+<h1 class="page-header">Projects Dashboard</h1>
+<div class="row">
+    <div class="col-lg-4" ng-repeat="project in projects">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                {{project.title}}
+            </div>
+            <div class="panel-body">
+                <p>{{project.subtitle}}</p>
+            </div>
+            <div class="panel-footer">
+                Panel Footer
+            </div>
+        </div>
+    </div>
+</div>
