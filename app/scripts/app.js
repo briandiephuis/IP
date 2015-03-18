@@ -21,5 +21,6 @@ angular.module('tomTomApp', [
     'firebase.utils',
     'simpleLogin',
     'ui.bootstrap',
-    'ui.router'
+    'ui.router',
+    'smart-table'
   ]);
