@@ -8,8 +8,9 @@
  * Controller of the tomTomApp
  */
 angular.module('tomTomApp')
-    .controller('PeopleCtrl', function($scope, People, Company) {
+    .controller('PeopleCtrl', function($scope, $filter, People, Company) {
         $scope.people = People;
+        $scope.displayedCollection = [].concat($scope.people);
         $scope.companies = Company;
         $scope.newPerson = {};
         $scope.add = function() {
