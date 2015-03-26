@@ -1,0 +1,49 @@
+<h1 class="page-header">People Dashboard</h1>
+<div class="row">
+    <div class="col-xs-12">
+        <accordion>
+            <accordion-group is-open="status.open">
+                <accordion-heading>
+                    Add a person <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': status.open, 'glyphicon-chevron-right': !status.open}"></i>
+                </accordion-heading>
+                <form ng-submit="add()">
+                    <div class="form-group">
+                        <label>First Name:</label>
+                        <input type="text" ng-model="newPerson.firstName" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label>Last Name:</label>
+                        <input type="text" ng-model="newPerson.lastName" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label>Company:</label>
+                        <input type="text" ng-model="newPerson.company" typeahead="company.companyName for company in companies | filter:$viewValue | limitTo:8" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" value="Save" class="btn btn-primary">
+                    </div>
+                </form>
+            </accordion-group>
+        </accordion>
+    </div>
+</div>
+<div class="row">
+    <div class="col-xs-12">
+        <table st-table="rowCollection" class="table table-striped">
+            <thead>
+                <tr>
+                    <th st-sort="getters.lastName">Name</th>
+                    <th st-sort="getters.company">Company</th>
+                    <th>&nbsp;</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="(id,person) in people">
+                    <td>{{person.lastName}}, {{person.firstName}}</td>
+                    <td>{{person.company}}</td>
+                    <td><a href="" ng-click="remove(id)"><i class="fa fa-trash-o"></i></a></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

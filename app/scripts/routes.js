@@ -126,29 +126,37 @@ angular.module('tomTomApp')
               }
           })
 
-        .state('knowledge', {
-            url: '/knowledge',
+        .state('assets', {
+            url: '/assets',
             abstract: true,
-            templateUrl: 'views/knowledge/index.html'
+            templateUrl: 'views/assets/index.html'
         })
-          .state('knowledge.dashboard', {
+          .state('assets.dashboard', {
               url: '/dashboard',
-              templateUrl: 'views/knowledge/dashboard.html',
+              templateUrl: 'views/assets/dashboard.html',
               controller: function($scope){
                 $scope.items = ['A', 'List', 'Of', 'Items'];
               }
           })
           
-        .state('route2', {
-            url: '/route2',
-            templateUrl: 'route2.html'
+        .state('people', {
+            url: '/people',
+            abstract: true,
+            templateUrl: 'views/people/index.html',
+            controller: 'PeopleCtrl'
         })
-          .state('route2.list', {
-              url: '/list',
-              templateUrl: 'route2.list.html',
-              controller: function($scope){
-                $scope.things = ['A', 'Set', 'Of', 'Things'];
-              }
+          .state('people.dashboard', {
+              url: '/dashboard',
+              templateUrl: 'views/people/dashboard.html',
+          })
+          .state('people.companies', {
+              url: '/companies',
+              templateUrl: 'views/people/companies.html',
+              controller: 'PeopleCompaniesCtrl'
+          })
+          .state('people.people', {
+              url: '/people',
+              templateUrl: 'views/people/people.html',
           })
         .state('login', {
             url: '/login',

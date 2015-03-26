@@ -2,34 +2,52 @@ $icon-font-path: "../bower_components/bootstrap-sass-official/assets/fonts/boots
 // bower:scss
 @import "bootstrap-sass-official/assets/stylesheets/_bootstrap.scss";
 // endbower
-
 .browsehappy {
-  margin: 0.2em 0;
-  background: #ccc;
-  color: #000;
-  padding: 0.2em 0;
+    margin: 0.2em 0;
+    background: #ccc;
+    color: #000;
+    padding: 0.2em 0;
+}
+
+.nav.navbar-top-links > li {
+    display: inline-block;
+}
+
+.nav.navbar-top-links > li.active {
+    background-color: #eeeeee;
 }
 
 // Navigation fix
-.nav.navbar-top-links > li {
-  display: inline-block;
+.nav.navbar-top-links > li.divider {
+    width: 1px;
+    height: 10px;
+    padding-top: 20px;
+    padding-bottom: 10px;
+    margin-bottom: -10px;
+    background-color: #000000;
 }
 
 .nav.navbar-top-links > li > a {
-  padding: 15px !important;
+    padding: 15px !important;
 }
+
+.wide {
+    width: 100%;
+}
+
 
 /* Responsive: Portrait tablets and up */
 @media screen and (min-width: 768px) {
-  .container {
-    max-width: 730px;
-  }
-
-  .sidebar {
-    margin-top: 0;
-  }
-
-  #page-wrapper {
-    display: inline-block;
-  }
+    .container {
+        max-width: 730px;
+    }
+    .sidebar {
+        margin-top: 0;
+    }
+    #page-wrapper {
+        display: inline-block;
+        width: 100%;
+        padding-left: 280px;
+        margin: 0;
+    }
 }

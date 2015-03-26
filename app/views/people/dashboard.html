@@ -1,0 +1,23 @@
+<h1 class="page-header">People Dashboard</h1>
+
+
+<table class="table">
+  <thead>
+    <th>First Name</th>
+    <th>Last Name</th>
+    <th>&nbsp;</th>
+    <th>&nbsp;</th>
+  </thead>
+  <tbody>
+    <tr ng-repeat="person in people">
+      <td>{{person.name}}</td>
+      <td>{{person.company}}</td>
+      <td>
+        <a href="#">Edit</a>
+      </t>
+      <td>
+        <a href="#">Remove</a>
+      </td>
+    </tr>
+  </tbody>
+</table>
