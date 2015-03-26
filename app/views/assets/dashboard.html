@@ -1,26 +1,84 @@
 <h1 class="page-header">Assets Dashboard</h1>
-
 <div class="row">
-	<div class="col-lg-8">
-		<h2>Company assets overview</h2>
-	</div>
-	<div class="col-lg-4">
-		<h2>Enter a new asset</h2>
+    <div class="col-lg-8">
+        <h2>Company assets overview</h2>
+        <table st-table="displayedAssets" st-safe-src="assets" class="table table-striped">
+            <thead>
+                <tr>
+                    <th st-sort="getters.assetTitle">Asset title</th>
+                    <th st-sort="getters.mainType">Type</th>
+                    <th st-sort="getters.subType">Content</th>
+                    <th st-sort="getters.stage">Stage</th>
+                    <th st-sort="getters.projects">projects</th>
+                    <th>&nbsp;</th>
+                </tr>
+<!--                 <tr>
+                    <th colspan="6">
+                        <input st-search="" class="form-control" placeholder="Search assets..." type="text" />
+                    </th>
+                </tr> -->
+            </thead>
+            <tbody>
+                <tr ng-repeat="(id,asset) in displayedAssets">
+                    <td>{{asset.assetTitle}}</td>
+                    <td>{{asset.mainType}}</td>
+                    <td>{{asset.subType}}</td>
+                    <td>{{asset.stage}}</td>
+                    <td><span class="label label-info label-project" ng-repeat="projectId in asset.projects"> {{projects.$getRecord(projectId).projectTitle}}</span></td>
+                    <td><a href="" ng-click="remove(id)"><i class="fa fa-trash-o"></i></a></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="col-lg-4">
+        <h2>Enter a new asset </h2>
         <accordion>
             <accordion-group is-open="newAssetAccordion.open">
                 <accordion-heading>
                     Add a company <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': newAssetAccordion.open, 'glyphicon-chevron-right': !newAssetAccordion.open}"></i>
                 </accordion-heading>
-                <form ng-submit="add()">
+                <form name="newAssetForm" ng-submit="add()" novalidate="novalidate">
                     <div class="form-group">
-                        <label>Asset title</label>
-                        <input type="text" ng-model="newAsset.title" class="form-control">
+                        <div class="input-group input-group-sm">
+                            <span class="input-group-addon" id="sizing-addon3">Title</span>
+                            <input type="text" ng-model="newAsset.assetTitle" class="form-control" placeholder="New asset title" aria-describedby="sizing-addon3" required unique>
+                        </div>
+                        <div class="input-group input-group-sm">
+                            <span class="input-group-addon" id="sizing-addon3">Stage</span>
+                            <select class="form-control" ng-model="newAsset.stage" ng-options="stage for stage in options.stages" required>
+                                <option value=''>Select</option>
+                            </select>
+                        </div>
+                        <div class="input-group input-group-sm">
+                            <span class="input-group-addon" id="sizing-addon3">Type</span>
+                            <select class="form-control" ng-model="newAsset.mainType" ng-options="mainType as mainType.mainType for mainType in options.types">
+                                <option value=''>Select type</option>
+                            </select>
+                        </div>
+                        <div class="input-group input-group-sm">
+                            <span class="input-group-addon" id="sizing-addon3">Content</span>
+                            <select class="form-control" ng-model="newAsset.subType" ng-disabled="!newAsset.mainType || newAsset.mainType.subTypes.length<1" ng-options="subType for subType in newAsset.mainType.subTypes">
+                                <option value=''>Select content</option>
+                            </select>
+                        </div>
+                        <div class="input-group input-group-sm">
+                            <span class="input-group-addon" id="sizing-addon3">Projects</span>
+                            <input type="text" ng-model="newAsset.project" typeahead="project as project.projectTitle for project in projects | filter:$viewValue | limitTo:8" class="form-control">
+                            <span class="input-group-btn">
+                                <button class="btn btn-default" type="button" ng-click="addProject(newAsset.project)">+</button>
+                            </span>
+                        </div>
+                        <ul>
+                            <li ng-repeat="project in newAsset.projects">
+                                {{project.projectTitle}}<a class="pull-right" href="#" ng-click="removeProject(project)"><i class="fa fa-minus-square"></i></a>
+                            </li>
+                        </ul>
                     </div>
                     <div class="form-group">
-                        <input type="submit" value="Save" class="btn btn-primary">
+                        <input type="submit" value="Create" class="btn btn-primary" ng-disabled="newAssetForm.$invalid">
                     </div>
                 </form>
             </accordion-group>
         </accordion>
-	</div>
+    </div>
 </div>

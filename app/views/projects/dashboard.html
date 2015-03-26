@@ -1,9 +1,9 @@
-<h1 class="page-header">Projects Dashboard</h1>
+<h1 class="page-header">Projects Dashboard<a href="#" ui-sref="projects.new" class="btn btn-primary pull-right"><i class="fa fa-plus"></i> Create new project</a></h1>
 <div class="row">
     <div class="col-lg-4" ng-repeat="project in projects">
         <div class="panel panel-default">
             <div class="panel-heading">
-                {{project.title}}
+                {{project.projectTitle}}
             </div>
             <div class="panel-body">
                 <p>{{project.subtitle}}</p>

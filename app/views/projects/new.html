@@ -1,0 +1,49 @@
+<form name="newProjectForm" ng-submit="add()" novalidate="novalidate">
+    <div class="form-title-wrapper">
+        <input type="text" ng-model="newProject.projectTitle" class="page-header form-title" placeholder="New project title" required unique>
+    </div>
+
+	
+
+    <div class="form-group">
+        <div class="input-group input-group-sm">
+            <span class="input-group-addon" id="sizing-addon3">Stage</span>
+            <select class="form-control" ng-model="newProject.stage" ng-options="stage for stage in options.stages" required>
+                <option value=''>Select</option>
+            </select>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="input-group input-group-sm">
+            <span class="input-group-addon" id="sizing-addon3">Type</span>
+            <select class="form-control" ng-model="newProject.mainType" ng-options="mainType as mainType.mainType for mainType in options.types">
+                <option value=''>Select type</option>
+            </select>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="input-group input-group-sm">
+            <span class="input-group-addon" id="sizing-addon3">Content</span>
+            <select class="form-control" ng-model="newProject.subType" ng-disabled="!newProject.mainType || newProject.mainType.subTypes.length<1" ng-options="subType for subType in newProject.mainType.subTypes">
+                <option value=''>Select content</option>
+            </select>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="input-group input-group-sm">
+            <span class="input-group-addon" id="sizing-addon3">Projects</span>
+            <input type="text" ng-model="newProject.project" typeahead="project as project.projectTitle for project in projects | filter:$viewValue | limitTo:8" class="form-control" />
+            <span class="input-group-btn">
+				<button class="btn btn-default" type="button" ng-click="addProject(newProject.project)">+</button>
+			</span>
+        </div>
+        <ul>
+            <li ng-repeat="project in newProject.projects">
+                {{project.projectTitle}}<a class="pull-right" href="#" ng-click="removeProject(project)"><i class="fa fa-minus-square"></i></a>
+            </li>
+        </ul>
+    </div>
+    <div class="form-group">
+        <input type="submit" value="Save" class="btn btn-primary" ng-disabled="newProjectForm.$invalid">
+    </div>
+</form>

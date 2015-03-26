@@ -22,5 +22,6 @@ angular.module('tomTomApp', [
     'simpleLogin',
     'ui.bootstrap',
     'ui.router',
-    'smart-table'
+    'smart-table',
+    'ngLodash'
   ]);

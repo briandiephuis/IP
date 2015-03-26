@@ -100,9 +100,11 @@ angular.module('tomTomApp')
           .state('projects.dashboard', {
               url: '/dashboard',
               templateUrl: 'views/projects/dashboard.html',
-              controller: function($scope){
-                $scope.items = ['A', 'List', 'Of', 'Items'];
-              }
+          })
+
+          .state('projects.new', {
+              url: '/new',
+              templateUrl: 'views/projects/new.html',
           })
 
         .state('planning', {
@@ -129,14 +131,12 @@ angular.module('tomTomApp')
         .state('assets', {
             url: '/assets',
             abstract: true,
-            templateUrl: 'views/assets/index.html'
+            templateUrl: 'views/assets/index.html',
+            controller: 'AssetsCtrl'
         })
           .state('assets.dashboard', {
               url: '/dashboard',
-              templateUrl: 'views/assets/dashboard.html',
-              controller: function($scope){
-                $scope.items = ['A', 'List', 'Of', 'Items'];
-              }
+              templateUrl: 'views/assets/dashboard.html'
           })
           
         .state('people', {
