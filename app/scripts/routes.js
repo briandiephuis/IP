@@ -107,9 +107,7 @@ angular.module('tomTomApp')
     .state('planning.tickets', {
         url: '/tickets',
         templateUrl: 'views/planning/tickets.html',
-        controller: function($scope) {
-            $scope.items = ['A', 'List', 'Of', 'Items'];
-        }
+        controller: 'TicketsCtrl'
     })
 
     .state('assets', {
