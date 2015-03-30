@@ -29,177 +29,180 @@
  */
 angular.module('tomTomApp')
 
-/**
- * Adds a special `whenAuthenticated` method onto $routeProvider. This special method,
- * when called, invokes the authRequired() service (see simpleLogin.js).
- *
- * The promise either resolves to the authenticated user object and makes it available to
- * dependency injection (see AccountCtrl), or rejects the promise if user is not logged in,
- * forcing a redirect to the /login page
- */
-  .config(['$routeProvider', 'SECURED_ROUTES', function($routeProvider, SECURED_ROUTES) {
-    // credits for this idea: https://groups.google.com/forum/#!msg/angular/dPr9BpIZID0/MgWVluo_Tg8J
-    // unfortunately, a decorator cannot be use here because they are not applied until after
-    // the .config calls resolve, so they can't be used during route configuration, so we have
-    // to hack it directly onto the $routeProvider object
-    $routeProvider.whenAuthenticated = function(path, route) {
-      route.resolve = route.resolve || {};
-      route.resolve.user = ['authRequired', function(authRequired) {
-        return authRequired();
-      }];
-      $routeProvider.when(path, route);
-      SECURED_ROUTES[path] = true;
-      return $routeProvider;
-    };
-  }])
+// configure views; the authRequired parameter is used for specifying pages
+// which should only be available while logged in
+// .config(['$routeProvider', function($routeProvider) {
+//   $routeProvider
+//     .when('/', {
+//       templateUrl: 'views/main.html',
+//       controller: 'MainCtrl'
+//     })
 
-  // configure views; the authRequired parameter is used for specifying pages
-  // which should only be available while logged in
-  // .config(['$routeProvider', function($routeProvider) {
-  //   $routeProvider
-  //     .when('/', {
-  //       templateUrl: 'views/main.html',
-  //       controller: 'MainCtrl'
-  //     })
+//     .when('/login', {
+//       templateUrl: 'views/login.html',
+//       controller: 'LoginCtrl'
+//     })
 
-  //     .when('/login', {
-  //       templateUrl: 'views/login.html',
-  //       controller: 'LoginCtrl'
-  //     })
+//     .when('/chat', {
+//       templateUrl: 'views/chat.html',
+//       controller: 'ChatCtrl'
+//     })
 
-  //     .when('/chat', {
-  //       templateUrl: 'views/chat.html',
-  //       controller: 'ChatCtrl'
-  //     })
+//     .whenAuthenticated('/account', {
+//       templateUrl: 'views/account.html',
+//       controller: 'AccountCtrl'
+//     })
 
-  //     .whenAuthenticated('/account', {
-  //       templateUrl: 'views/account.html',
-  //       controller: 'AccountCtrl'
-  //     })
+//     .when('/chat', {
+//       templateUrl: 'views/chat.html',
+//       controller: 'ChatCtrl'
+//     })
+//     .otherwise({redirectTo: '/'});
+// }])
 
-  //     .when('/chat', {
-  //       templateUrl: 'views/chat.html',
-  //       controller: 'ChatCtrl'
-  //     })
-  //     .otherwise({redirectTo: '/'});
-  // }])
+.config(function ($urlRouterProvider) {
+ 
+  // Prevent $urlRouter from automatically intercepting URL changes;
+  // this allows you to configure custom behavior in between
+  // location changes and route synchronization:
+  $urlRouterProvider.deferIntercept();
+ 
+})
 
-  .config(function($stateProvider, $urlRouterProvider){
-      
-      // For any unmatched url, send to /route1
-      $urlRouterProvider.otherwise('/');
-      
-      $stateProvider
+.config(function($stateProvider, $urlRouterProvider) {
 
+    // For any unmatched url, send to /route1
+    $urlRouterProvider.otherwise('/');
+
+    $stateProvider
         .state('projects', {
             url: '/projects',
             abstract: true,
             templateUrl: 'views/projects/index.html',
             controller: 'ProjectsCtrl'
         })
-          .state('projects.dashboard', {
-              url: '/dashboard',
-              templateUrl: 'views/projects/dashboard.html',
-          })
+        .state('projects.dashboard', {
+            url: '/dashboard',
+            templateUrl: 'views/projects/dashboard.html',
+        })
 
-          .state('projects.new', {
-              url: '/new',
-              templateUrl: 'views/projects/new.html',
-          })
+    .state('projects.new', {
+        url: '/new',
+        templateUrl: 'views/projects/new.html',
+    })
 
-        .state('planning', {
+    .state('planning', {
             url: '/planning',
             abstract: true,
             templateUrl: 'views/planning/index.html'
         })
-          .state('planning.dashboard', {
-              url: '/dashboard',
-              templateUrl: 'views/planning/dashboard.html',
-              controller: function($scope){
+        .state('planning.dashboard', {
+            url: '/dashboard',
+            templateUrl: 'views/planning/dashboard.html',
+            controller: function($scope) {
                 $scope.items = ['A', 'List', 'Of', 'Items'];
-              }
-          })
+            }
+        })
 
-          .state('planning.tickets', {
-              url: '/tickets',
-              templateUrl: 'views/planning/tickets.html',
-              controller: function($scope){
-                $scope.items = ['A', 'List', 'Of', 'Items'];
-              }
-          })
+    .state('planning.tickets', {
+        url: '/tickets',
+        templateUrl: 'views/planning/tickets.html',
+        controller: function($scope) {
+            $scope.items = ['A', 'List', 'Of', 'Items'];
+        }
+    })
 
-        .state('assets', {
+    .state('assets', {
             url: '/assets',
             abstract: true,
             templateUrl: 'views/assets/index.html',
             controller: 'AssetsCtrl'
         })
-          .state('assets.dashboard', {
-              url: '/dashboard',
-              templateUrl: 'views/assets/dashboard.html'
-          })
-          
-        .state('people', {
+        .state('assets.dashboard', {
+            url: '/dashboard',
+            templateUrl: 'views/assets/dashboard.html'
+        })
+
+    .state('people', {
             url: '/people',
             abstract: true,
             templateUrl: 'views/people/index.html',
             controller: 'PeopleCtrl'
         })
-          .state('people.dashboard', {
-              url: '/dashboard',
-              templateUrl: 'views/people/dashboard.html',
-          })
-          .state('people.companies', {
-              url: '/companies',
-              templateUrl: 'views/people/companies.html',
-              controller: 'PeopleCompaniesCtrl'
-          })
-          .state('people.people', {
-              url: '/people',
-              templateUrl: 'views/people/people.html',
-          })
-        .state('login', {
-            url: '/login',
-            templateUrl: 'views/login.html',
-            controller: 'LoginCtrl'
+        .state('people.dashboard', {
+            url: '/dashboard',
+            templateUrl: 'views/people/dashboard.html',
         })
-        .state('account', {
-            url: '/account',
-            templateUrl: 'views/account.html',
-            controller: 'AccountCtrl'
-        });
-    })
-
-  /**
-   * Apply some route security. Any route's resolve method can reject the promise with
-   * { authRequired: true } to force a redirect. This method enforces that and also watches
-   * for changes in auth status which might require us to navigate away from a path
-   * that we can no longer view.
-   */
-  .run(['$rootScope', '$location', 'simpleLogin', 'SECURED_ROUTES', 'loginRedirectPath',
-    function($rootScope, $location, simpleLogin, SECURED_ROUTES, loginRedirectPath) {
-      // watch for login status changes and redirect if appropriate
-      simpleLogin.watch(check, $rootScope);
-
-      // some of our routes may reject resolve promises with the special {authRequired: true} error
-      // this redirects to the login page whenever that is encountered
-      $rootScope.$on('$routeChangeError', function(e, next, prev, err) {
-        if( angular.isObject(err) && err.authRequired ) {
-          $location.path(loginRedirectPath);
-        }
+        .state('people.companies', {
+            url: '/companies',
+            templateUrl: 'views/people/companies.html',
+            controller: 'PeopleCompaniesCtrl',
+        })
+        .state('people.company', {
+            url: '/companies/:id',
+            templateUrl: 'views/people/company.html',
+            controller: 'PeopleCompanyCtrl'
+        })
+        .state('people.people', {
+            url: '/people',
+            templateUrl: 'views/people/people.html',
+        })
+      .state('login', {
+          url: '/login',
+          templateUrl: 'views/login.html',
+          controller: 'LoginCtrl'
+      })
+      .state('account', {
+          url: '/account',
+          templateUrl: 'views/account.html',
+          controller: 'AccountCtrl'
       });
+})
 
-      function check(user) {
-        if( !user && authRequired($location.path()) ) {
-          $location.path(loginRedirectPath);
-        }
-      }
+/**
+ * Apply some route security. Any route's resolve method can reject the promise with
+ * { authRequired: true } to force a redirect. This method enforces that and also watches
+ * for changes in auth status which might require us to navigate away from a path
+ * that we can no longer view.
+ */
+// .run(['$rootScope', '$state', '$urlRouter', 'simpleLogin',
+//     function($rootScope, $state, simpleLogin) {
+//         // watch for login status changes and redirect if appropriate
+//         simpleLogin.watch(check, $rootScope);
 
-      function authRequired(path) {
-        return SECURED_ROUTES.hasOwnProperty(path);
-      }
-    }
-  ])
+//         // some of our routes may reject resolve promises with the special {authRequired: true} error
+//         // this redirects to the login page whenever that is encountered
+//         $rootScope.$on('$urlRouterSuccess', function(e, next, prev, err) {
+//             if (angular.isObject(err) && err.authRequired) {
+//                 $state.go('login');
+//             }
+//         });
 
-  // used by route security
-  .constant('SECURED_ROUTES', {});
+//         function check(user) {
+//             if (!user) {
+//                 $state.go('login');
+//             }
+//         }
+//     }
+// ])
+.run(function ($rootScope, $urlRouter, $state, simpleLogin) {
+ 
+  $rootScope.$on('$locationChangeSuccess', function(e) {
+    // UserService is an example service for managing user state
+    
+    if (!$state.is('login') && simpleLogin.user===null) { $state.go('login'); return; }
+ 
+    // Prevent $urlRouter's default handler from firing
+    e.preventDefault();
+ 
+    simpleLogin.login().then(function() {
+      // Once the user has logged in, sync the current URL
+      // to the router:
+      $urlRouter.sync();
+    });
+  });
+ 
+  // Configures $urlRouter's listener *after* your custom listener
+  $urlRouter.listen();
+});
+

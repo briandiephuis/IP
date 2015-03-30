@@ -45,7 +45,7 @@
             <tbody>
                 <tr ng-repeat="(id,person) in displayedCollection">
                     <td>{{person.lastName}}, {{person.firstName}}</td>
-                    <td>{{person.company.companyName}}</td>
+                    <td>{{companies.$getRecord(person.companyId).companyName}}</td>
                     <td><a href="" ng-click="remove(id)"><i class="fa fa-trash-o"></i></a></td>
                 </tr>
             </tbody>

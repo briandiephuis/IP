@@ -28,4 +28,5 @@ angular.module('tomTomApp')
         };
 
         $scope.companies = Company;
+
     });

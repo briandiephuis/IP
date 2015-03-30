@@ -61,13 +61,23 @@ angular.module('tomTomApp')
 
             }
         };
-        $scope.addProject = function(project) {
-        	if(typeof project === 'object'){
-        		$scope.newAsset.projects.push(project);	
-        		$scope.newAsset.project = '';
-        	}
-        	
-        };
+
+        // Add project
+        $scope.$watch('newAsset.project', function(newValue){
+            if(typeof newValue === 'object'){
+                console.log(_.findIndex($scope.newAsset.projects, newValue));
+                if(_.findIndex($scope.newAsset.projects, newValue)===-1) {
+                    $scope.newAsset.projects.push(newValue); 
+                } else {
+                    // doubles not allowed
+                    var i = _.findIndex($scope.newAsset.projects, function(chr) {
+                        return chr.projectTitle === newValue.projectTitle;
+                    });
+                    $scope.newAsset.projects[i].highlight = true;
+                }
+                $scope.newAsset.project = '';
+            }
+        });
         $scope.removeProject = function(project) {
         	_.pull($scope.newAsset.projects,project);
         };

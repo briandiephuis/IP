@@ -9,41 +9,31 @@
     <a class="logo" href="index.html"><img ng-src="images/logo.svg" width="160" height="40" alt="TomTom PLM"></a>
 </div>
 <!-- /.navbar-header -->
-
 <ul class="nav navbar-top-links navbar-left" ng-controller="NavbarTopLinksCtrl">
-    <li ui-sref-active="active"><a href="#" ui-sref="planning.dashboard" >Planning</a></li>
+    <li ui-sref-active="active"><a href="#" ui-sref="planning.dashboard">Planning</a></li>
     <li ui-sref-active="active"><a href="#" ui-sref="projects.dashboard">Projects</a></li>
     <li ui-sref-active="active"><a href="#" ui-sref="people.dashboard">People</a></li>
     <li class="divider"></li>
     <li ui-sref-active="active"><a href="#" ui-sref="assets.dashboard">Assets</a></li>
 </ul>
-
 <ul class="nav navbar-top-links navbar-right" ng-controller="NavbarTopLinksCtrl">
     <!-- messages -->
-    <li>
+    <li ng-show="user">
         <a class="dropdown-toggle" data-toggle="dropdown" href="#">
             <i class="fa fa-envelope fa-fw"></i> <i class="fa fa-caret-down"></i>
         </a>
     </li>
-    <!-- settings -->
-    <li>
-        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-            <i class="fa fa-tasks fa-fw"></i> <i class="fa fa-caret-down"></i>
-        </a>
-    </li>
-
     <!-- alerts -->
-    <li>
+    <li ng-show="user">
         <a class="dropdown-toggle" data-toggle="dropdown" href="#">
             <i class="fa fa-bell fa-fw"></i> <i class="fa fa-caret-down"></i>
         </a>
     </li>
-
     <!-- user/authentication -->
-    <li>
+    <li ng-hide="user">
         <a ui-sref="login"><i class="fa fa-user fa-fw"></i> log in</a>
     </li>
-    <li class="dropdown" dropdown on-toggle="toggled(open)">
+    <li class="dropdown" dropdown on-toggle="toggled(open)" ng-show="user">
         <a href class="dropdown-toggle" dropdown-toggle>
             <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
         </a>

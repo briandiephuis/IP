@@ -7,12 +7,14 @@
  * Provides rudimentary account management functions.
  */
 angular.module('tomTomApp')
-  .controller('AccountCtrl', function ($scope, user, simpleLogin, fbutil, $timeout) {
-    $scope.user = user;
+  .controller('AccountCtrl', function ($scope, simpleLogin, fbutil, $timeout) {
+    $scope.user = simpleLogin.user;
     $scope.logout = simpleLogin.logout;
     $scope.messages = [];
     var profile;
-    loadProfile(user);
+    loadProfile(simpleLogin.user);
+
+    console.log('account.js');
 
     $scope.changePassword = function(oldPass, newPass, confirm) {
       $scope.err = null;

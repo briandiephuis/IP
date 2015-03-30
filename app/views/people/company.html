@@ -1,0 +1,43 @@
+<h1 class="page-header">{{company.companyName}}</h1>
+<div class="row">
+    <div class="col-lg-8">
+        <h2>Devisions</h2>
+        <div class="row">
+            <div class="col-lg-4" ng-repeat="(id, devision) in devisions">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+						{{devision.devisionName}}
+						<a href="" ng-click="removeDevision(id)" class="pull-right"><i class="fa fa-trash-o"></i></a>
+                    </div>
+                    <div class="panel-body">
+                        <p>{{devision.description}}</p>
+                    </div>
+                </div>
+            </div>
+            <!-- Add devision -->
+            <div class="col-lg-4">
+                <form ng-submit="addDevision()">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <input type="text" ng-model="newDevision.devisionName" class="form-control" placeholder="Devision title">
+                        </div>
+                        <div class="panel-body">
+                            <div class="form-group">
+                                <textarea class="form-control" rows="3" ng-model="newDevision.description">Devision description..</textarea>
+                            </div>
+                            <input type="submit" value="Add" class="btn btn-primary pull-right">
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-4">
+        <h2>People</h2>
+        <ul>
+            <li ng-repeat="person in people | filter:{companyId:company.$id}">
+                {{person.firstName}} {{person.lastName}}
+            </li>
+        </ul>
+    </div>
+</div>

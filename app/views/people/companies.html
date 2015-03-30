@@ -19,22 +19,21 @@
         </accordion>
     </div>
 </div>
-
 <div class="row">
     <div class="col-xs-12">
-<table st-table="rowCollection" class="table table-striped">
-    <thead>
-    <tr>
-        <th st-sort="getters.companyName">Company name</th>
-        <th>&nbsp;</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr ng-repeat="(id,company) in companies">
-        <td>{{company.companyName}}</td>
-        <td><a href="" ng-click="remove(id)"><i class="fa fa-trash-o"></i></a></td>
-    </tr>
-    </tbody>
-</table>
+        <table st-table="rowCollection" class="table table-striped">
+            <thead>
+                <tr>
+                    <th st-sort="getters.companyName">Company name</th>
+                    <th>&nbsp;</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="(id,company) in companies">
+                    <td><a ui-sref="people.company({ id: company.$id })">{{company.companyName}}</a></td>
+                    <td><a href="#" ng-click="remove(id)"><i class="fa fa-trash-o"></i></a></td>
+                </tr>
+            </tbody>
+        </table>
     </div>
 </div>

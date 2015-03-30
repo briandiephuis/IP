@@ -17,7 +17,7 @@ angular.module('tomTomApp')
             var save = People.$add({
                 firstName: $scope.newPerson.firstName,
                 lastName: $scope.newPerson.lastName,
-                company: $scope.newPerson.company
+                companyId: $scope.newPerson.company.$id
             });
 
             if (save) {
@@ -31,5 +31,4 @@ angular.module('tomTomApp')
         $scope.remove = function(id) {
             People.$remove(id);
         };
-
     });

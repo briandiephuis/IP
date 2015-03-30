@@ -14,4 +14,6 @@ angular.module('tomTomApp')
 
   		$scope.logout = simpleLogin.logout;
 
+  		$scope.user = simpleLogin.user;
+
   });

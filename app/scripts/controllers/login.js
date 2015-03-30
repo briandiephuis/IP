@@ -7,7 +7,7 @@
  * Manages authentication to any active providers.
  */
 angular.module('tomTomApp')
-  .controller('LoginCtrl', function ($scope, simpleLogin, $location) {
+  .controller('LoginCtrl', function ($scope, simpleLogin, $state) {
     $scope.passwordLogin = function(email, pass) {
       $scope.err = null;
       simpleLogin.passwordLogin({email: email, password: pass}, {rememberMe: true}).then(
@@ -31,7 +31,7 @@ angular.module('tomTomApp')
     
 
     function redirect() {
-      $location.path('/account');
+      $state.go('account');
     }
 
     function showError(err) {

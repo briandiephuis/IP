@@ -8,7 +8,6 @@
  * Factory in the tomTomApp.
  */
 angular.module('tomTomApp')
-  .factory('Company', function (FBURL, $firebase, Firebase) {
+  .factory('Companies', function (FBURL, $firebase, Firebase) {
     return $firebase(new Firebase(FBURL+'/companies')).$asArray();
   });
-
