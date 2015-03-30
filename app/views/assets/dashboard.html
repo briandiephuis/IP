@@ -20,7 +20,7 @@
             </thead>
             <tbody>
                 <tr ng-repeat="(id,asset) in displayedAssets">
-                    <td>{{asset.assetTitle}}</td>
+                    <td><a href="" ui-sref="assets.asset({ id: asset.$id })">{{asset.assetTitle}}</a></td>
                     <td>{{asset.mainType}}</td>
                     <td>{{asset.subType}}</td>
                     <td>{{asset.stage}}</td>

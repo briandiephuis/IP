@@ -118,10 +118,15 @@ angular.module('tomTomApp')
             templateUrl: 'views/assets/index.html',
             controller: 'AssetsCtrl'
         })
-        .state('assets.dashboard', {
-            url: '/dashboard',
-            templateUrl: 'views/assets/dashboard.html'
-        })
+          .state('assets.dashboard', {
+              url: '/dashboard',
+              templateUrl: 'views/assets/dashboard.html'
+          })
+          .state('assets.asset', {
+              url: '/:id',
+              templateUrl: 'views/assets/asset.html',
+              controller: 'AssetsAssetCtrl'
+          })
 
     .state('people', {
             url: '/people',
