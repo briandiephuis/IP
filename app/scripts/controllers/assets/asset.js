@@ -8,11 +8,25 @@
  * Controller of the tomTomApp
  */
 angular.module('tomTomApp')
-    .controller('AssetsAssetCtrl', function($scope, FBURL, $firebase, Firebase, $stateParams, People) {
+    .controller('AssetsAssetCtrl', function($scope, FBURL, $firebase, Firebase, $stateParams, People, EspaceNet) {
         var ref = new Firebase(FBURL).child('assets').child($stateParams.id);
         $scope.asset = $firebase(ref).$asObject();
         $scope.people = People;
-        
+
+
+        $scope.newPatent = {
+            applicationNumber: 'WO2015036595'
+        };
+        $scope.addPatent = function() {
+            
+        };
+
+        var setData = function(data) {
+            $scope.patent = data;
+        };
+
+        EspaceNet.get(setData);
+
 
         $scope.map = {
             type: 'world',
