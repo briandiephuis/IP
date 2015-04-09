@@ -1,18 +1,68 @@
 <h1 class="page-header">Tickets</h1>
-
-<table st-table="rowCollection" class="table table-striped">
-	<thead>
-	<tr>
-		<th st-sort="getters.firstName">first name</th>
-		<th st-sort="lastName">last name</th>
-		<th st-sort="birthDate">birth date</th>
-	</tr>
-	</thead>
-	<tbody>
-	<tr ng-repeat="row in rowCollection">
-		<td>{{row.firstName | uppercase}}</td>
-		<td>{{row.lastName}}</td>
-		<td>{{row.birthDate | date}}</td>
-	</tr>
-	</tbody>
-</table>
+<div class="row">
+    <div class="col-lg-8">
+        <h2>Overview</h2>
+        <table st-table="displayedTicket" st-safe-src="tickets" class="table table-striped">
+            <thead>
+                <tr>
+                    <th st-sort="getters.tickettitle">Ticket title</th>
+                    <th st-sort="getters.ticketdesc">Description</th>
+                    <th st-sort="getters.projects">Related project(s)</th>
+                    <th>Owner</th>
+                    <th>&nbsp;</th>
+                </tr>
+                <!--                 <tr>
+                    <th colspan="6">
+                        <input st-search="" class="form-control" placeholder="Search tickets..." type="text" />
+                    </th>
+                </tr> -->
+            </thead>
+            <tbody>
+                <tr ng-repeat="(id,ticket) in tickets">
+                    <td>{{ticket.tickettitle}}</td>
+                    <td>{{ticket.ticketdesc}}</td>
+                    
+                    <td><span class="label label-info label-project" ng-repeat="projectId in ticket.projects"> {{projects.$getRecord(projectId).projectTitle}}</span></td>
+                    <td>{{allpeople.$getRecord(ticket.ownerId).lastName}}, {{allpeople.$getRecord(ticket.ownerId).firstName}}</td>
+                    <td><a href="" ng-click="remove(id)"><i class="fa fa-trash-o"></i></a></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="col-lg-4">
+        <h2>Enter a new ticket </h2>
+        <accordion>
+            <accordion-group is-open="newTicketAccordion.open">
+                <accordion-heading>
+                    Add a company <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': newTicketAccordion.open, 'glyphicon-chevron-right': !newTicketAccordion.open}"></i>
+                </accordion-heading>
+                <form name="newTicketForm" ng-submit="add()" novalidate="novalidate">
+                    <div class="form-group input-group input-group-sm">
+                        <span class="input-group-addon" id="sizing-addon3">Title</span>
+                        <input type="text" ng-model="newTicket.tickettitle" class="form-control" placeholder="New ticket title" aria-describedby="sizing-addon3" required unique>
+                    </div>
+                    <div class="form-group input-group input-group-sm">
+                        <span class="input-group-addon" id="sizing-addon4">Description</span>
+                        <input type="text" class="form-control" ng-model="newTicket.ticketdesc" placeholer="Describe purpose" aria-describedby="sizing-addon4" required>
+                    </div>
+                    <div class="form-group input-group input-group-sm">
+                        <span class="input-group-addon" id="sizing-addon5">Projects</span>
+                        <input type="text" ng-model="newTicket.project" aria-describedby="sizing-addon5"  typeahead="project as project.projectTitle for project in projects | filter:$viewValue | limitTo:8" class="form-control">
+                    </div>
+                    <ul>
+                        <li ng-repeat="project in newTicket.projects">
+                            {{project.projectTitle}}<a class="pull-right" href="" ng-click="removeProject(project)" ng-class="{highlight: project.highlight===true}"><i class="fa fa-minus-square"></i></a>
+                        </li>
+                    </ul>
+                    <div class="form-group input-group input-group-sm">
+                        <span class="input-group-addon" id="sizing-addon6">Owner</span>
+						<input type="text" ng-model="newTicket.owner" aria-describedby="sizing-addon6" typeahead="people as [people.lastName+', '+people.firstName] for people in allpeople | filter:$viewValue | limitTo:8" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" value="Create" class="btn btn-primary" ng-disabled="newTicketForm.$invalid">
+                    </div>
+                </form>
+            </accordion-group>
+        </accordion>
+    </div>
+</div>
