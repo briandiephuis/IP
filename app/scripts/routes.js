@@ -86,10 +86,10 @@ angular.module('tomTomApp')
             templateUrl: 'views/projects/dashboard.html',
         })
 
-    .state('projects.new', {
-        url: '/new',
-        templateUrl: 'views/projects/new.html',
-    })
+      .state('projects.new', {
+          url: '/new',
+          templateUrl: 'views/projects/new.html',
+      })
 
     .state('planning', {
             url: '/planning',

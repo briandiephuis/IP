@@ -8,24 +8,17 @@
  * Factory in the tomTomApp.
  */
 angular.module('tomTomApp')
-    .factory('EspaceNet', ['$http', 'x2js', function($http, x2js) {
-        var url = 'http://ops.epo.org/3.1/rest-services/published-data/publication/epodoc/WO2015036595/abstract.xml';
+    .factory('EspaceNet', ['$http', function($http) {
+        // var url = 'http://ops.epo.org/3.1/rest-services/published-data/publication/epodoc/WO2015036595/abstract.xml';
+        // url = 'http://ops.epo.org/rest-services/published-data/publication/epodoc/WO2015036595.json';
+
         return {
-            get: function(callback) {
-                $http.get(url, {
-                        transformResponse: function(data) {
-                            console.log(x2js);
-                            console.log(data);
-                            var json = x2js.xml_str2json(data);
-                            console.log(json);
-                            return  json;
-                        }
-                    })
+            get: function(reference) {
+                console.log('Getting patent: '+reference);
+                return $http.get('http://ops.epo.org/rest-services/published-data/publication/epodoc/' + reference + '.json')
                     .success(function(data) {
-                        callback(data);
+                        return data['ops:world-patent-data']['exchange-documents']['exchange-document'];
                     });
             }
         };
-
-
     }]);
