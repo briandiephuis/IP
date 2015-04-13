@@ -18,8 +18,8 @@
                         <div class="input-group">
                             <input type="text" ng-model="newPatent.applicationNumber" class="form-control" placeholder="Application number" aria-describedby="sizing-addon3" required unique>
                             <span class="input-group-btn">
-                                    <button class="btn btn-default" type="submit">Search</button>
-                                </span>
+                                <button class="btn btn-default" type="submit">Search</button>
+                            </span>
                         </div>
                     </form>
                     <div ng-show="newPatent.patent">
@@ -29,6 +29,9 @@
                         <div ng-show="newPatent.success">
                             <hr/>
                             <button class="btn btn-primary" type="button" ng-click="addPatent()">Add</button>
+                        </div>
+                        <div ng-hide="newPatent.success">
+                            <div class="alert alert-danger" role="alert">Patent not found.</div>
                         </div>
                     </div>
                 </div>

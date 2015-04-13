@@ -61,7 +61,7 @@ angular.module('tomTomApp')
             })
             .then(function(patent) {
                 $scope.newPatent.patent = patent.data['ops:world-patent-data']['exchange-documents']['exchange-document'];
-                $scope.newPatent.success = (patent.data['@status'])?false:true;
+                $scope.newPatent.success = ($scope.newPatent.patent['@status'])?false:true;
                 console.log(patent);
                 debugger;
             });
