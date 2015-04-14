@@ -27,19 +27,19 @@ angular.module('tomTomApp')
         };
         $scope.newAsset = angular.copy(newAssetProto);
         $scope.options = {
-            stages: ['unregistered', 'pending', 'declined', 'registred'],
+            stages: ['unregistered', 'pending', 'declined', 'registred', 'stage-less', 'undefined'],
             types: [{
                 mainType: 'Patent',
-                subTypes: ['algorithm', 'software', 'mechanical']
+                subTypes: ['Hardware', 'Logic', 'Otherwise']
             }, {
                 mainType: 'Design right',
-                subTypes: ['logo'],
+                subTypes: ['Product design', 'Otherwise'],
             }, {
                 mainType: 'Trademark',
-                subTypes: ['logo'],
+                subTypes: ['Logo', 'Name', 'Combination', 'Otherwise'],
             }, {
                 mainType: 'Non-disclosure agreement',
-                subTypes: []
+                subTypes: ['']
             }, ]
         };
         $scope.add = function() {

@@ -39,7 +39,7 @@
                     <tabset>
                         <tab ng-repeat="p in asset.patents" heading="{{p.applicationNumber}}">
                             <button class="pull-right btn btn-danger" type="button" ng-click="removePatent(p)"><i class="fa fa-chain-broken"></i> Remove patent link</button>
-                            <h4>{{p.inventionTitle}}</h4>
+                            <h4>{{p.inventionTitle | lowercase }}</h4>
                         </tab>
                     </tabset>
                 </div>
@@ -51,22 +51,27 @@
     <div class="col-lg-7">
         <div class="panel panel-default">
             <div class="panel-heading">
-                {{asset.mainType}}
+                {{asset.mainType}} tasks
             </div>
             <div class="panel-body">
-                <ul class="timeline">
-                    <li ng-repeat="task in tasks" ng-class="{timeline-inverted: $even}">
-                        <div class="timeline-badge {{task.status}}"></div>
+                <ul class="timeline" ng-show="asset.tasks">
+                    <li ng-repeat="task in asset.tasks | openTasks:true" ng-class="{'timeline-inverted': $odd}">
+                        <div class="timeline-badge {{task.badge}}" ng-show="task.badge"></div>
                         <div class="timeline-panel">
-                            <div class="timeline-heading">
-                                <h4 class="timeline-title">{{task.taskTitle}}</h4>
+                            <div class="timeline-heading clearfix">
+                                <h4 class="timeline-title pull-left">{{task.taskTitle}}</h4>
+                                <button type="button" ng-click="doneTask(task.$id)" class="btn btn-link btn-xs pull-right" tooltip="Mark Completed"><i class="fa fa-check"></i></a>
+                                <button type="button" ng-click="editTask(task.$id)" class="btn btn-link btn-xs pull-right" tooltip="Edit task"><i class="fa fa-pencil"></i></a>
+                                
                             </div>
                             <div class="timeline-body">
                                 <p>{{task.description}}</p>
+                                <p>{{task.endDate|date}}</p>
                             </div>
                         </div>
                     </li>
                 </ul>
+                <p ng-hide="asset.tasks">There are no tasks for this asset.</p>
             </div>
             <div class="panel-footer">
                 <h2>Add task</h2>
@@ -75,11 +80,16 @@
                         <div class="col-md-6">
                             <div class="form-group input-group input-group-sm">
                                 <span class="input-group-addon" id="sizing-addon3">Title</span>
-                                <input type="text" ng-model="newTask.taskTitle" class="form-control" placeholder="New asset title" aria-describedby="sizing-addon3" required unique>
+                                <input type="text" ng-model="newTask.taskTitle" class="form-control" placeholder="New task title" aria-describedby="sizing-addon3" required unique>
                             </div>
+                            <div class="form-group">
+                                <textarea class="form-control" ng-model="newTask.description" id="textarea" rows="8" placeholder="Enter a short description"></textarea>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
                             <div class="form-group input-group input-group-sm">
                                 <span class="input-group-addon" id="sizing-addon3">Status</span>
-                                <select class="form-control" ng-model="newTask.status" ng-options="status for status in options.statusList" required>
+                                <select class="form-control" ng-model="newTask.status" ng-options="status for status in newTaskOptions.statusList" required>
                                     <option value=''>Select status</option>
                                 </select>
                             </div>
@@ -87,15 +97,21 @@
                                 <span class="input-group-addon" id="sizing-addon3">Owner</span>
                                 <input type="text" ng-model="newTask.owner" typeahead="person as [person.lastName+', '+person.firstName] for person in people | filter:$viewValue | limitTo:8" class="form-control">
                             </div>
-                        </div>
-                        <div class="col-md-6">
                             <div class="form-group input-group input-group-sm">
-                                <span class="input-group-addon" id="sizing-addon3">Content</span>
-                                <select class="form-control" ng-model="newTask.subType" ng-disabled="!newTask.mainType || newTask.mainType.subTypes.length<1" ng-options="subType for subType in newTask.mainType.subTypes">
-                                    <option value=''>Select content</option>
-                                </select>
+                                <span class="input-group-addon" id="sizing-addon3">Start date</span>
+                                <input type="text" class="form-control" datepicker-popup="dd-MM-yyyy" ng-model="newTask.startDate" is-open="startOpened" ng-required="true" close-text="Close" />
+                                <span class="input-group-btn">
+                                        <button type="button" class="btn btn-default" ng-click="openStart($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+                                    </span>
                             </div>
                             <div class="form-group input-group input-group-sm">
+                                <span class="input-group-addon" id="sizing-addon3">End date</span>
+                                <input type="text" class="form-control" datepicker-popup="dd-MM-yyyy" ng-model="newTask.endDate" is-open="endOpened" ng-required="false" close-text="Close" />
+                                <span class="input-group-btn">
+                                        <button type="button" class="btn btn-default" ng-click="openEnd($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+                                    </span>
+                            </div>
+                            <!--                             <div class="form-group input-group input-group-sm">
                                 <span class="input-group-addon" id="sizing-addon3">Projects</span>
                                 <input type="text" ng-model="newTask.project" typeahead="project as project.projectTitle for project in projects | filter:$viewValue | limitTo:8" class="form-control">
                             </div>
@@ -103,7 +119,7 @@
                                 <li ng-repeat="project in newTask.projects">
                                     {{project.projectTitle}}<a class="pull-right" href="" ng-click="removeProject(project)" ng-class="{highlight: project.highlight===true}"><i class="fa fa-minus-square"></i></a>
                                 </li>
-                            </ul>
+                            </ul> -->
                             <div class="form-group">
                                 <input type="submit" value="Create" class="btn btn-primary" ng-disabled="newTaskForm.$invalid">
                             </div>

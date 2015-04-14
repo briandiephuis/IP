@@ -24,6 +24,5 @@ angular.module('tomTomApp', [
     'ui.router',
     'smart-table',
     'ngLodash',
-    'datamaps',
-    'cb.x2js',
+    'datamaps'
   ]);

@@ -35,7 +35,7 @@
         <accordion>
             <accordion-group is-open="newAssetAccordion.open">
                 <accordion-heading>
-                    Add a company <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': newAssetAccordion.open, 'glyphicon-chevron-right': !newAssetAccordion.open}"></i>
+                    New asset <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': newAssetAccordion.open, 'glyphicon-chevron-right': !newAssetAccordion.open}"></i>
                 </accordion-heading>
                 <form name="newAssetForm" ng-submit="add()" novalidate="novalidate">
                     <div class="form-group input-group input-group-sm">
@@ -44,7 +44,7 @@
                     </div>
                     <div class="form-group input-group input-group-sm">
                         <span class="input-group-addon" id="sizing-addon3">Status</span>
-                        <select class="form-control" ng-model="newAsset.stage" ng-options="stage for stage in options.statusList" required>
+                        <select class="form-control" ng-model="newAsset.stage" ng-options="stage for stage in options.stages" required>
                             <option value=''>Select</option>
                         </select>
                     </div>
