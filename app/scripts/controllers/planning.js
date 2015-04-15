@@ -30,6 +30,7 @@ angular.module('tomTomApp')
             open: true
         };
         $scope.newTicket = angular.copy(newTicketProto);
+        var today = new Date(); 
         $scope.add = function() {
             var projects = [];
             angular.forEach($scope.newTicket.projects, function(project) {
@@ -42,6 +43,8 @@ angular.module('tomTomApp')
                 ticketdesc: $scope.newTicket.ticketdesc,
                 ownerId: ownerId,
                 projects: projects,
+                read: false,
+                createdAt: today.toISOString()
             });
 
             if (save) {

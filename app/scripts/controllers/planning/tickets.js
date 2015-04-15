@@ -32,12 +32,15 @@ angular.module('tomTomApp')
                 projects.push(project.$id);
             });
             // console.log($scope.userPerson);
+            var today = new Date();
             var ownerId = $scope.newTicket.owner?$scope.newTicket.owner.$id:$scope.userPerson.$id;
             var save = Ticket.$add({
                 tickettitle: $scope.newTicket.tickettitle,
                 ticketdesc: $scope.newTicket.ticketdesc,
                 ownerId: ownerId,
                 projects: projects,
+                read: false,
+                createdAt: today.toISOString()
             });
 
             if (save) {

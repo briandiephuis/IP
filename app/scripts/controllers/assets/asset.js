@@ -21,7 +21,7 @@ angular.module('tomTomApp')
         // TW201502476 
         $scope.newPatent = {
             show: true,
-            applicationNumber: 'US2014266798'
+            applicationNumber: null
         };
         $scope.asset.$loaded(function() {
             if ($scope.asset.patents) {

@@ -55,23 +55,30 @@
                     <a class="dropdown-toggle" dropdown-toggle href>
                         <i class="fa fa-envelope fa-fw"></i> <i class="fa fa-caret-down"></i>
                     </a>
-                    <ul class="dropdown-menu dropdown-messages">
-                        <li ng-repeat="ticket in tickets | filter:{ownerId: userPerson.$id}">
-                            <a href="#">
+                    <ul class="dropdown-menu dropdown-messages" ng-show="userPerson.userId==='simplelogin:5'">
+                        <li ng-repeat="ticket in tickets | orderBy:'createdAt':true | filter:{read: false}">
+                            <a href="#" ui-sref="planning.ticket({id: ticket.$id})">
                                 <div>
                                     <strong>{{ticket.tickettitle}}</strong>
                                     <span class="pull-right text-muted">
-                                        <em>Yesterday</em>
+                                        <em>{{ticket.createdAt|date}}</em>
                                     </span>
                                 </div>
                                 <div>{{ticket.ticketdesc}}</div>
                             </a>
                         </li>
-                        <li class="divider"></li>
+                        <li ng-hide="(tickets | filter:{read: false}).length > 0">
+                            <a>There are no new messages.</a>
+                        </li>
+                    </ul>
+                    <ul class="dropdown-menu dropdown-messages" ng-hide="userPerson.userId==='simplelogin:5'">
+                        <li>
+                            <a>There are no new messages.</a>
+                        </li>
                     </ul>
                 </li>
                 <!-- alerts -->
-<!-- <li ng-show="user">
+                <!-- <li ng-show="user">
     <a class="dropdown-toggle" data-toggle="dropdown" href="#">
         <i class="fa fa-bell fa-fw"></i> <i class="fa fa-caret-down"></i>
     </a>

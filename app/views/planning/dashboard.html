@@ -48,6 +48,7 @@
                         {{ticket|json}}
                     </li>
                 </ul> -->
+
                 <ul class="chat">
                     <li ng-repeat="ticket in tickets | filter:{ownerId: userPerson.$id}" class="clearfix" ng-class="{right: $odd, left: $even}">
                         <span class="chat-img" ng-class="{'pull-right': $odd, 'pull-left': $even}">
@@ -57,7 +58,7 @@
                             <div class="header">
                                 <strong class="primary-font" ng-class="{'pull-right': $odd}">{{allpeople.$getRecord(ticket.ownerId).firstName}} {{allpeople.$getRecord(ticket.ownerId).lastName}}: {{ticket.tickettitle}}</strong>
                                 <small class="text-muted" ng-class="{'pull-right': $even}">
-                                                <i class="fa fa-clock-o fa-fw"></i> 12 mins ago
+                                                <i class="fa fa-clock-o fa-fw"></i> {{ticket.createdAt|date}}
                                             </small>
                             </div>
                             <p>
@@ -67,6 +68,9 @@
                                 <p><strong>Declined</strong>: {{ticket.declineReason}}</p>
                             </div>
                         </div>
+                    </li>
+                    <li ng-hide="(tickets | filter:{ownerId: userPerson.$id}).length>0">
+                        You have not yet created any tickets
                     </li>
                     <!--                     <li ng-repeat="ticket in tickets | filter:{ownerId: userPerson.$id}" class="clearfix left">
                         <span class="chat-img pull-left">

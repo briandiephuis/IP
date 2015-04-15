@@ -8,8 +8,8 @@ People
    ✔ Email, Phone, IM, Company (incl. devision, primary-location), Address, Birthday, Started working at, etc? @done (15-04-15 12:04)
    ✔ Zoeken, details bekijken @done (15-04-15 12:04)
 
- ☐ IP uitwerken (assets)
-   ☐ Ticket -> accept=>asset aanmaken, deny=>ticket terug met reden
+ ✔ IP uitwerken (assets) @done (15-04-15 16:16)
+   ✔ Ticket -> accept=>asset aanmaken, deny=>ticket terug met reden @done (15-04-15 16:16)
    ✔ Planning @done (15-04-15 12:05)
      - Tasks op tijdstip
 
@@ -17,10 +17,10 @@ People
 
 
 Vanavond:
-  ☐ Tickets van naar
-  ☐ Nieuwe tickets per persoon (rechtsboven)
-  ☐ Ticket details   -> Accepteren -> Asset
-                   ☐ -> Decline (met reden)
+  ✔ Tickets van naar @done (15-04-15 16:16)
+  ✔ Nieuwe tickets per persoon (rechtsboven) @done (15-04-15 16:16)
+  ✔ Ticket details   -> Accepteren -> Asset @done (15-04-15 16:16)
+                   ✔ -> Decline (met reden) @done (15-04-15 16:16)
 
   ✔ Users list ipv personen lijst @done (15-04-15 12:05)
 
@@ -29,6 +29,7 @@ Vanavond:
       ✔ CPC-code moet link naar espacenet zijn. @done (15-04-15 12:05)
 
   ☐ Assets vullen
+  ☐ Aantal nieuwe messages weergeven voor Anouk
 
 
 
@@ -41,3 +42,7 @@ Vanavond:
      Enforcement (checking)
      Anouk heeft nieuwe planning gemaakt, gaat terug naar asset overzicht
      Assets gefilterd op non-secrecy -> checkt alle CPC-codes, als nieuw in CPC-code -> dan weergeven en laten checken door Anouk. 
+
+
+
+

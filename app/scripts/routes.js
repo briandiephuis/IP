@@ -72,7 +72,7 @@ angular.module('tomTomApp')
 .config(function($stateProvider, $urlRouterProvider) {
 
     // For any unmatched url, send to /route1
-    $urlRouterProvider.otherwise('/');
+    $urlRouterProvider.otherwise('planning.dashboard');
 
     $stateProvider
         .state('projects', {

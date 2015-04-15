@@ -31,7 +31,7 @@ angular.module('tomTomApp')
     
 
     function redirect() {
-      $state.go('account');
+      $state.go('planning.dashboard');
     }
 
     function showError(err) {
@@ -42,10 +42,10 @@ angular.module('tomTomApp')
     $scope.fillLogin = function (name) {
       if(name==='Anouk') {
         $scope.email = 'anouk@tomtom.nl';
-        $scope.password = 'asdf';
+        $scope.pass = 'asdf';
       } else if(name==='Roy') {
         $scope.email = 'roy@tomtom.nl';
-        $scope.password = 'asdf';
+        $scope.pass = 'asdf';
       }
     };
 
