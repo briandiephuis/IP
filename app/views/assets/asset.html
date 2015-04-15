@@ -28,6 +28,8 @@
                         <p ng-repeat="p in newPatent.patent['abstract'] | lang:'en'">{{p}}</p>
                         <div ng-show="newPatent.success">
                             <hr/>
+                            <p>Also published as: <span class="label label-default" style="margin-right: .5em" ng-repeat="equivalent in newPatent.equivalents">{{equivalent['publication-reference']['document-id']['doc-number'].$}}</span></p>
+                            <hr/>
                             <button class="btn btn-primary" type="button" ng-click="addPatent()">Add</button>
                         </div>
                         <div ng-hide="newPatent.success">
@@ -37,9 +39,26 @@
                 </div>
                 <div ng-hide="newPatent.show">
                     <tabset>
-                        <tab ng-repeat="p in asset.patents" heading="{{p.applicationNumber}}">
+                        <tab ng-repeat="p in asset.patents" heading="{{p.applicationNumber}}" select="loadPatent(p.applicationNumber)">
                             <button class="pull-right btn btn-danger" type="button" ng-click="removePatent(p)"><i class="fa fa-chain-broken"></i> Remove patent link</button>
                             <h4>{{p.inventionTitle | lowercase }}</h4>
+                            <div class="row" ng-show="tabPatent.success">
+                                <div class="col-md-8">
+                                    <p ng-repeat="p in tabPatent.patent['abstract'] | lang:'en'">{{p}}</p>
+                                    <p>Applicants: <span class="label label-default" style="margin-right: .5em" ng-repeat="applicant in tabPatent.patent['bibliographic-data']['parties']['applicants']['applicant'] | filter:{'@data-format': 'epodoc'}">{{applicant['applicant-name'].name.$}}</span></p>
+                                    <p>Inventors: <span class="label label-primary" style="margin-right: .5em" ng-repeat="inventor in tabPatent.patent['bibliographic-data']['parties']['inventors']['inventor'] | filter:{'@data-format': 'epodoc'}">{{inventor['inventor-name'].name.$}}</span></p>
+                                </div>
+                                <div class="col-md-4">
+                                    <h4>CPC codes</h4>
+                                    <p ng-repeat="cpc in tabPatent.patent['bibliographic-data']['patent-classifications']['patent-classification']">
+                                    <a href="http://worldwide.espacenet.com/classification?locale=en_EP#!/CPC={{cpc.section.$}}{{cpc.class.$}}{{cpc.subclass.$}}{{cpc['main-group'].$}}/{{cpc.subgroup.$}}" target="_blank">{{cpc.section.$}}{{cpc.class.$}}{{cpc.subclass.$}}{{cpc['main-group'].$}}/{{cpc.subgroup.$}}</a>
+                                    </p>
+                                    <!-- | filter:{['classification-scheme'].@scheme: 'CPC'} -->
+
+<!-- G08G1/0112 -->
+                                </div>
+                            </div>
+                            <p ng-hide="tabPatent.success">Fetching patent information from Espacenet...</p>
                         </tab>
                     </tabset>
                 </div>
@@ -61,8 +80,7 @@
                             <div class="timeline-heading clearfix">
                                 <h4 class="timeline-title pull-left">{{task.taskTitle}}</h4>
                                 <button type="button" ng-click="doneTask(task.$id)" class="btn btn-link btn-xs pull-right" tooltip="Mark Completed"><i class="fa fa-check"></i></a>
-                                <button type="button" ng-click="editTask(task.$id)" class="btn btn-link btn-xs pull-right" tooltip="Edit task"><i class="fa fa-pencil"></i></a>
-                                
+                                    <button type="button" ng-click="editTask(task.$id)" class="btn btn-link btn-xs pull-right" tooltip="Edit task"><i class="fa fa-pencil"></i></a>
                             </div>
                             <div class="timeline-body">
                                 <p>{{task.description}}</p>

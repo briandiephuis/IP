@@ -14,4 +14,31 @@ People
    ☐ Planning
      - Tasks op tijdstip
 
-   
+
+
+
+Vanavond:
+  Tickets van naar
+  Nieuwe tickets per persoon (rechtsboven)
+  Ticket details   -> Accepteren -> Asset
+                   -> Decline (met reden)
+
+  Users list ipv personen lijst
+
+  Asset
+    Info bij tabblad vinden (Abstract, CPC-codes)
+      CPC-code moet link naar espacenet zijn.
+
+  Assets vullen
+
+
+
+  Scenario1:
+    Roy heeft goed idee: ticket -> anouk
+    Anouk krijgt ticket -> controle -> asset
+    Asset krijgt planning
+
+   Scenario2:
+     Enforcement (checking)
+     Anouk heeft nieuwe planning gemaakt, gaat terug naar asset overzicht
+     Assets gefilterd op non-secrecy -> checkt alle CPC-codes, als nieuw in CPC-code -> dan weergeven en laten checken door Anouk. 

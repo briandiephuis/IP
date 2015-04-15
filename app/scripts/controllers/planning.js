@@ -8,10 +8,9 @@
  * Controller of the tomTomApp
  */
 angular.module('tomTomApp')
-  .controller('PlanningCtrl', function ($scope) {
-    $scope.awesomeThings = [
-      'HTML5 Boilerplate',
-      'AngularJS',
-      'Karma'
-    ];
+  .controller('PlanningCtrl', function ($scope, Ticket, Project, People, Company) {
+        $scope.tickets = Ticket;
+        $scope.projects = Project;
+        $scope.people = People;
+        $scope.companies = Company;
   });

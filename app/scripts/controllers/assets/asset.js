@@ -46,6 +46,16 @@ angular.module('tomTomApp')
                 });
         };
 
+        $scope.loadPatent = function(applicationNumber) {
+            $scope.tabPatent = {};
+            EspaceNet.get(applicationNumber)
+                .then(function(patent) {
+                    $scope.tabPatent.patent = patent.data['ops:world-patent-data']['exchange-documents']['exchange-document'];
+                    $scope.tabPatent.success = ($scope.tabPatent.patent['@status']) ? false : true;
+                    console.log($scope.tabPatent.patent);
+                });
+        };
+
         $scope.removePatent = function(patent) {
             lodash.pull($scope.asset.patents, patent);
             $scope.asset.$save();
@@ -64,9 +74,13 @@ angular.module('tomTomApp')
                     $scope.newPatent.success = false;
                 })
                 .then(function(patent) {
-                    console.log(patent);
                     $scope.newPatent.patent = patent.data['ops:world-patent-data']['exchange-documents']['exchange-document'];
                     $scope.newPatent.success = ($scope.newPatent.patent['@status']) ? false : true;
+                });
+            EspaceNet.getEquivalents(ref)
+                .then(function(equivalents) {
+                    $scope.newPatent.equivalents = equivalents.data['ops:world-patent-data']['ops:equivalents-inquiry']['ops:inquiry-result'];
+                    console.log($scope.newPatent.equivalents);
                 });
         };
 
@@ -166,9 +180,9 @@ angular.module('tomTomApp')
             if (Object.prototype.toString.call($scope.asset.tasks) !== '[object Array]') {
                 $scope.asset.tasks = []; // Create tasks array if it did not yet exist
             }
-            var ownerId = (typeof($scope.newTask.owner)==='object')?$scope.newTask.owner.$id:null;
-            var startDate = ($scope.newTask.startDate)?$scope.newTask.startDate.toISOString():null;
-            var endDate = ($scope.newTask.endDate)?$scope.newTask.endDate.toISOString():null;
+            var ownerId = (typeof($scope.newTask.owner) === 'object') ? $scope.newTask.owner.$id : null;
+            var startDate = ($scope.newTask.startDate) ? $scope.newTask.startDate.toISOString() : null;
+            var endDate = ($scope.newTask.endDate) ? $scope.newTask.endDate.toISOString() : null;
             $scope.asset.tasks.push({ // Add object to patents array
                 'taskTitle': $scope.newTask.taskTitle,
                 'description': $scope.newTask.description,

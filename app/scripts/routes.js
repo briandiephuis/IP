@@ -60,13 +60,13 @@ angular.module('tomTomApp')
 //     .otherwise({redirectTo: '/'});
 // }])
 
-.config(function ($urlRouterProvider) {
- 
-  // Prevent $urlRouter from automatically intercepting URL changes;
-  // this allows you to configure custom behavior in between
-  // location changes and route synchronization:
-  $urlRouterProvider.deferIntercept();
- 
+.config(function($urlRouterProvider) {
+
+    // Prevent $urlRouter from automatically intercepting URL changes;
+    // this allows you to configure custom behavior in between
+    // location changes and route synchronization:
+    $urlRouterProvider.deferIntercept();
+
 })
 
 .config(function($stateProvider, $urlRouterProvider) {
@@ -86,10 +86,10 @@ angular.module('tomTomApp')
             templateUrl: 'views/projects/dashboard.html',
         })
 
-      .state('projects.new', {
-          url: '/new',
-          templateUrl: 'views/projects/new.html',
-      })
+    .state('projects.new', {
+        url: '/new',
+        templateUrl: 'views/projects/new.html',
+    })
 
     .state('planning', {
             url: '/planning',
@@ -99,9 +99,7 @@ angular.module('tomTomApp')
         .state('planning.dashboard', {
             url: '/dashboard',
             templateUrl: 'views/planning/dashboard.html',
-            controller: function($scope) {
-                $scope.items = ['A', 'List', 'Of', 'Items'];
-            }
+            controller: 'PlanningCtrl'
         })
 
     .state('planning.tickets', {
@@ -116,15 +114,15 @@ angular.module('tomTomApp')
             templateUrl: 'views/assets/index.html',
             controller: 'AssetsCtrl'
         })
-          .state('assets.dashboard', {
-              url: '/dashboard',
-              templateUrl: 'views/assets/dashboard.html'
-          })
-          .state('assets.asset', {
-              url: '/:id',
-              templateUrl: 'views/assets/asset.html',
-              controller: 'AssetsAssetCtrl'
-          })
+        .state('assets.dashboard', {
+            url: '/dashboard',
+            templateUrl: 'views/assets/dashboard.html'
+        })
+        .state('assets.asset', {
+            url: '/:id',
+            templateUrl: 'views/assets/asset.html',
+            controller: 'AssetsAssetCtrl'
+        })
 
     .state('people', {
             url: '/people',
@@ -150,16 +148,16 @@ angular.module('tomTomApp')
             url: '/people',
             templateUrl: 'views/people/people.html',
         })
-      .state('login', {
-          url: '/login',
-          templateUrl: 'views/login.html',
-          controller: 'LoginCtrl'
-      })
-      .state('account', {
-          url: '/account',
-          templateUrl: 'views/account.html',
-          controller: 'AccountCtrl'
-      });
+        .state('login', {
+            url: '/login',
+            templateUrl: 'views/login.html',
+            controller: 'LoginCtrl'
+        })
+        .state('account', {
+            url: '/account',
+            templateUrl: 'views/account.html',
+            controller: 'AccountCtrl'
+        });
 })
 
 /**
@@ -188,24 +186,36 @@ angular.module('tomTomApp')
 //         }
 //     }
 // ])
-.run(function ($rootScope, $urlRouter, $state, simpleLogin) {
- 
-  $rootScope.$on('$locationChangeSuccess', function(e) {
-    // UserService is an example service for managing user state
-    
-    if (!$state.is('login') && simpleLogin.user===null) { $state.go('login'); return; }
- 
-    // Prevent $urlRouter's default handler from firing
-    e.preventDefault();
- 
-    simpleLogin.login().then(function() {
-      // Once the user has logged in, sync the current URL
-      // to the router:
-      $urlRouter.sync();
-    });
-  });
- 
-  // Configures $urlRouter's listener *after* your custom listener
-  $urlRouter.listen();
-});
+.run(function($rootScope, $urlRouter, $state, simpleLogin) {
 
+    $rootScope.$on('$locationChangeSuccess', function(e) {
+        // UserService is an example service for managing user state
+
+        if (!$state.is('login') && simpleLogin.user === null) {
+            $state.go('login');
+            return;
+        }
+
+        // Prevent $urlRouter's default handler from firing
+        e.preventDefault();
+
+        simpleLogin.login().then(function() {
+            // Once the user has logged in, sync the current URL
+            // to the router:
+            $urlRouter.sync();
+        });
+
+        // // watch for login status changes and redirect if appropriate
+        // simpleLogin.watch(check, $rootScope);
+
+        // function check(user) {
+        //     if (!user) {
+        //         $state.go('login');
+        //     }
+        // }
+
+    });
+
+    // Configures $urlRouter's listener *after* your custom listener
+    $urlRouter.listen();
+});
