@@ -1,0 +1,52 @@
+<h1 class="page-header">Creat a new asset</h1>
+<div class="row">
+    <div class="col-md-12">
+        <form name="newAssetForm" ng-submit="add()" novalidate="novalidate">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    New asset
+                </div>
+                <div class="panel-body">
+                    <div class="form-group input-group input-group-sm">
+                        <span class="input-group-addon" id="sizing-addon3">Title</span>
+                        <input type="text" ng-model="newAsset.assetTitle" class="form-control" placeholder="New asset title" aria-describedby="sizing-addon3" required unique>
+                    </div>
+                    <div class="form-group input-group input-group-sm">
+                        <span class="input-group-addon" id="sizing-addon3">Title</span>
+                        <input type="text" ng-model="newAsset.assetDescription" class="form-control" placeholder="New asset description" aria-describedby="sizing-addon3">
+                    </div>
+                    <div class="form-group input-group input-group-sm">
+                        <span class="input-group-addon" id="sizing-addon3">Status</span>
+                        <select class="form-control" ng-model="newAsset.stage" ng-options="stage for stage in options.stages" required>
+                            <option value=''>Select</option>
+                        </select>
+                    </div>
+                    <div class="form-group input-group input-group-sm">
+                        <span class="input-group-addon" id="sizing-addon3">Type</span>
+                        <select class="form-control" ng-model="newAsset.mainType" ng-options="mainType as mainType.mainType for mainType in options.types">
+                            <option value=''>Select type</option>
+                        </select>
+                    </div>
+                    <div class="form-group input-group input-group-sm">
+                        <span class="input-group-addon" id="sizing-addon3">Content</span>
+                        <select class="form-control" ng-model="newAsset.subType" ng-disabled="!newAsset.mainType || newAsset.mainType.subTypes.length<1" ng-options="subType for subType in newAsset.mainType.subTypes">
+                            <option value=''>Select content</option>
+                        </select>
+                    </div>
+                    <div class="form-group input-group input-group-sm">
+                        <span class="input-group-addon" id="sizing-addon3">Projects</span>
+                        <input type="text" ng-model="newAsset.project" typeahead="project as project.projectTitle for project in projects | filter:$viewValue | limitTo:8" class="form-control">
+                    </div>
+                    <ul>
+                        <li ng-repeat="project in newAsset.projects">
+                            {{project.projectTitle}}<a class="pull-right" href="" ng-click="removeProject(project)" ng-class="{highlight: project.highlight===true}"><i class="fa fa-minus-square"></i></a>
+                        </li>
+                    </ul>
+                    <div class="form-group">
+                        <input type="submit" value="Create" class="btn btn-primary" ng-disabled="newAssetForm.$invalid">
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

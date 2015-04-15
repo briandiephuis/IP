@@ -39,4 +39,14 @@ angular.module('tomTomApp')
     }
 
 
+    $scope.fillLogin = function (name) {
+      if(name==='Anouk') {
+        $scope.email = 'anouk@tomtom.nl';
+        $scope.password = 'asdf';
+      } else if(name==='Roy') {
+        $scope.email = 'roy@tomtom.nl';
+        $scope.password = 'asdf';
+      }
+    };
+
   });

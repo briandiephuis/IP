@@ -11,10 +11,10 @@
                 <!-- /input-group -->
             </li>
             <li>
-                <a href="#" ui-sref="planning.dashboard"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
+                <a href="#" ui-sref="planning.dashboard"><i class="fa fa-dashboard fa-fw"></i> My IP Tickets</a>
             </li>
-            <li>
-                <a href="#" ui-sref="planning.tickets"><i class="fa fa-ticket fa-fw"></i> Tickets</a>
+            <li ng-show="userPerson.userId==='simplelogin:5'">
+                <a href="#" ui-sref="planning.tickets"><i class="fa fa-ticket fa-fw"></i> All IP Tickets</a>
             </li>
         </ul>
     </div>

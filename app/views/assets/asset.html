@@ -69,18 +69,22 @@
 <div class="row">
     <div class="col-lg-7">
         <div class="panel panel-default">
-            <div class="panel-heading">
+            <div class="panel-heading clearfix">
                 {{asset.mainType}} tasks
+                <button type="button" class="btn btn-sm pull-right" ng-class="{'btn-default': !taskListOpen, 'btn-danger': taskListOpen}" ng-model="taskListOpen" btn-checkbox btn-checkbox-true="true" btn-checkbox-false="false">
+                    <i class="fa fa-check-square-o" ng-show="taskListOpen"></i><i class="fa fa-square-o" ng-hide="taskListOpen"></i> Show {{taskListOpen?'open':'closed'}} tasks
+                </button>
             </div>
             <div class="panel-body">
                 <ul class="timeline" ng-show="asset.tasks">
-                    <li ng-repeat="task in asset.tasks | openTasks:true" ng-class="{'timeline-inverted': $odd}">
+                    <li ng-repeat="task in asset.tasks | openTasks:taskListOpen" ng-class="{'timeline-inverted': $odd}">
                         <div class="timeline-badge {{task.badge}}" ng-show="task.badge"></div>
                         <div class="timeline-panel">
                             <div class="timeline-heading clearfix">
                                 <h4 class="timeline-title pull-left">{{task.taskTitle}}</h4>
-                                <button type="button" ng-click="doneTask(task.$id)" class="btn btn-link btn-xs pull-right" tooltip="Mark Completed"><i class="fa fa-check"></i></a>
-                                    <button type="button" ng-click="editTask(task.$id)" class="btn btn-link btn-xs pull-right" tooltip="Edit task"><i class="fa fa-pencil"></i></a>
+                                <button type="button" ng-click="updateTaskStatus(task, 'Closed')" class="btn btn-link btn-xs pull-right" tooltip="Close task"><i class="fa fa-times"></i></a>
+                                <button type="button" ng-click="updateTaskStatus(task, 'Completed')" class="btn btn-link btn-xs pull-right" tooltip="Mark Completed"><i class="fa fa-check"></i></a>
+                                <button type="button" ng-click="editTask(task)" class="btn btn-link btn-xs pull-right" tooltip="Edit task"><i class="fa fa-pencil"></i></a>
                             </div>
                             <div class="timeline-body">
                                 <p>{{task.description}}</p>

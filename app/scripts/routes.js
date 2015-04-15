@@ -81,83 +81,94 @@ angular.module('tomTomApp')
             templateUrl: 'views/projects/index.html',
             controller: 'ProjectsCtrl'
         })
-        .state('projects.dashboard', {
-            url: '/dashboard',
-            templateUrl: 'views/projects/dashboard.html',
-        })
+            .state('projects.dashboard', {
+                url: '/dashboard',
+                templateUrl: 'views/projects/dashboard.html',
+            })
+            .state('projects.new', {
+                url: '/new',
+                templateUrl: 'views/projects/new.html',
+            })
 
-    .state('projects.new', {
-        url: '/new',
-        templateUrl: 'views/projects/new.html',
-    })
-
-    .state('planning', {
+        .state('planning', {
             url: '/planning',
             abstract: true,
             templateUrl: 'views/planning/index.html'
         })
-        .state('planning.dashboard', {
-            url: '/dashboard',
-            templateUrl: 'views/planning/dashboard.html',
-            controller: 'PlanningCtrl'
-        })
+            .state('planning.dashboard', {
+                url: '/dashboard',
+                templateUrl: 'views/planning/dashboard.html',
+                controller: 'PlanningCtrl'
+            })
+            .state('planning.tickets', {
+                url: '/tickets',
+                templateUrl: 'views/planning/tickets.html',
+                controller: 'PlanningTicketsCtrl'
+            })
+            .state('planning.ticket', {
+                url: '/:id',
+                templateUrl: 'views/planning/ticket.html',
+                controller: 'PlanningTicketCtrl'
+            })
 
-    .state('planning.tickets', {
-        url: '/tickets',
-        templateUrl: 'views/planning/tickets.html',
-        controller: 'TicketsCtrl'
-    })
-
-    .state('assets', {
+        .state('assets', {
             url: '/assets',
             abstract: true,
             templateUrl: 'views/assets/index.html',
             controller: 'AssetsCtrl'
         })
-        .state('assets.dashboard', {
-            url: '/dashboard',
-            templateUrl: 'views/assets/dashboard.html'
-        })
-        .state('assets.asset', {
-            url: '/:id',
-            templateUrl: 'views/assets/asset.html',
-            controller: 'AssetsAssetCtrl'
-        })
-
-    .state('people', {
+            .state('assets.dashboard', {
+                url: '/dashboard',
+                templateUrl: 'views/assets/dashboard.html'
+            })
+            .state('assets.create', {
+                url: '/new',
+                templateUrl: 'views/assets/create.html',
+                controller: 'AssetsCreateCtrl'
+            })
+            .state('assets.asset', {
+                url: '/:id',
+                templateUrl: 'views/assets/asset.html',
+                controller: 'AssetsAssetCtrl'
+            })
+            
+        .state('people', {
             url: '/people',
             abstract: true,
             templateUrl: 'views/people/index.html',
             controller: 'PeopleCtrl'
         })
-        .state('people.dashboard', {
-            url: '/dashboard',
-            templateUrl: 'views/people/dashboard.html',
-        })
-        .state('people.companies', {
-            url: '/companies',
-            templateUrl: 'views/people/companies.html',
-            controller: 'PeopleCompaniesCtrl',
-        })
-        .state('people.company', {
-            url: '/companies/:id',
-            templateUrl: 'views/people/company.html',
-            controller: 'PeopleCompanyCtrl'
-        })
-        .state('people.people', {
-            url: '/people',
-            templateUrl: 'views/people/people.html',
-        })
+            .state('people.dashboard', {
+                url: '/dashboard',
+                templateUrl: 'views/people/dashboard.html',
+            })
+            .state('people.companies', {
+                url: '/companies',
+                templateUrl: 'views/people/companies.html',
+                controller: 'PeopleCompaniesCtrl',
+            })
+            .state('people.company', {
+                url: '/companies/:id',
+                templateUrl: 'views/people/company.html',
+                controller: 'PeopleCompanyCtrl'
+            })
+            .state('people.people', {
+                url: '/people',
+                templateUrl: 'views/people/people.html',
+            })
+
         .state('login', {
             url: '/login',
             templateUrl: 'views/login.html',
             controller: 'LoginCtrl'
         })
+
         .state('account', {
             url: '/account',
             templateUrl: 'views/account.html',
             controller: 'AccountCtrl'
         });
+
 })
 
 /**

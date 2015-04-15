@@ -1,24 +1,61 @@
-<h1 class="page-header">Planning Dashboard</h1>
+<h1 class="page-header">Intellectual Property tickets</h1>
+<p>Stumbled upon something great, something that might be interesting to protect within our company? Please create a ticket here to let the IP specialist take a look at it.</p>
 <div class="row">
-    <div class="col-md-6">
+    <div class="col-lg-4 col-md-push-8">
+        <h2>Enter a new ticket</h2>
+        <accordion>
+            <accordion-group is-open="newTicketAccordion.open">
+                <accordion-heading>
+                    Propose an IP ticket <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': newTicketAccordion.open, 'glyphicon-chevron-right': !newTicketAccordion.open}"></i>
+                </accordion-heading>
+                <form name="newTicketForm" ng-submit="add()" novalidate="novalidate">
+                    <div class="form-group input-group input-group-sm">
+                        <span class="input-group-addon" id="sizing-addon3">Title</span>
+                        <input type="text" ng-model="newTicket.tickettitle" class="form-control" placeholder="New ticket title" aria-describedby="sizing-addon3" required unique>
+                    </div>
+                    <div class="form-group input-group input-group-sm">
+                        <span class="input-group-addon" id="sizing-addon4">Description</span>
+                        <input type="text" class="form-control" ng-model="newTicket.ticketdesc" placeholer="Describe purpose" aria-describedby="sizing-addon4" required>
+                    </div>
+                    <div class="form-group input-group input-group-sm">
+                        <span class="input-group-addon" id="sizing-addon5">Projects</span>
+                        <input type="text" ng-model="newTicket.project" aria-describedby="sizing-addon5" typeahead="project as project.projectTitle for project in projects | filter:$viewValue | limitTo:8" class="form-control">
+                    </div>
+                    <ul>
+                        <li ng-repeat="project in newTicket.projects">
+                            {{project.projectTitle}}<a class="pull-right" href="" ng-click="removeProject(project)" ng-class="{highlight: project.highlight===true}"><i class="fa fa-minus-square"></i></a>
+                        </li>
+                    </ul>
+                    <!--                     <div class="form-group input-group input-group-sm">
+                        <span class="input-group-addon" id="sizing-addon6">Owner</span>
+                        <input type="text" ng-model="newTicket.owner" aria-describedby="sizing-addon6" typeahead="people as [people.lastName+', '+people.firstName] for people in allpeople | filter:$viewValue | limitTo:8" class="form-control" required>
+                    </div> -->
+                    <div class="form-group">
+                        <input type="submit" value="Create" class="btn btn-primary" ng-disabled="newTicketForm.$invalid">
+                    </div>
+                </form>
+            </accordion-group>
+        </accordion>
+    </div>
+    <div class="col-md-8 col-md-pull-4">
         <div class="chat-panel panel panel-default">
             <div class="panel-heading">
-                My tickets
+                My ticket history
             </div>
             <div class="panel-body">
-                <!--             	<ul>
-            		<li ng-repeat="ticket in tickets | filter:{ownerId: userPerson.$id}">
-						{{ticket|json}}
-            		</li>
-            	</ul> -->
+                <!--                <ul>
+                    <li ng-repeat="ticket in tickets | filter:{ownerId: userPerson.$id}">
+                        {{ticket|json}}
+                    </li>
+                </ul> -->
                 <ul class="chat">
                     <li ng-repeat="ticket in tickets | filter:{ownerId: userPerson.$id}" class="clearfix" ng-class="{right: $odd, left: $even}">
                         <span class="chat-img" ng-class="{'pull-right': $odd, 'pull-left': $even}">
-                        	<img src="http://placehold.it/50/55C1E7/fff" alt="User Avatar" class="img-circle">
+                            <img src="http://placehold.it/50/55C1E7/fff" alt="User Avatar" class="img-circle">
                         </span>
                         <div class="chat-body clearfix">
                             <div class="header">
-                                <strong class="primary-font" ng-class="{'pull-right': $odd}">Jack Sparrow: {{ticket.tickettitle}}</strong>
+                                <strong class="primary-font" ng-class="{'pull-right': $odd}">{{allpeople.$getRecord(ticket.ownerId).firstName}} {{allpeople.$getRecord(ticket.ownerId).lastName}}: {{ticket.tickettitle}}</strong>
                                 <small class="text-muted" ng-class="{'pull-right': $even}">
                                                 <i class="fa fa-clock-o fa-fw"></i> 12 mins ago
                                             </small>
@@ -26,11 +63,14 @@
                             <p>
                                 {{ticket.ticketdesc}}
                             </p>
+                            <div class="alert alert-danger" role="alert" ng-show="ticket.declined">
+                                <p><strong>Declined</strong>: {{ticket.declineReason}}</p>
+                            </div>
                         </div>
                     </li>
-<!--                     <li ng-repeat="ticket in tickets | filter:{ownerId: userPerson.$id}" class="clearfix left">
+                    <!--                     <li ng-repeat="ticket in tickets | filter:{ownerId: userPerson.$id}" class="clearfix left">
                         <span class="chat-img pull-left">
-                        	<img src="http://placehold.it/50/55C1E7/fff" alt="User Avatar" class="img-circle">
+                            <img src="http://placehold.it/50/55C1E7/fff" alt="User Avatar" class="img-circle">
                         </span>
                         <div class="chat-body clearfix">
                             <div class="header">

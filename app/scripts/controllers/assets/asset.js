@@ -199,7 +199,15 @@ angular.module('tomTomApp')
         };
         // Title, Description, owner, creation-date, finish-date, status
 
+        $scope.updateTaskStatus = function(task, status) {
+            var i = lodash.findIndex($scope.asset.tasks, task);
+            if (i > -1) {
+                $scope.asset.tasks[i].status = status;
+                $scope.asset.$save();
+            }
+        };
 
+        $scope.taskListOpen = false;
 
 
 

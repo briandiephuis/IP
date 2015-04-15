@@ -1,0 +1,44 @@
+<h1 class="page-header">Ticket details</h1>
+<div class="row">
+    <div class="col-md-12">
+        <div class="row">
+            <div class="col-md-8">
+                <h2>{{ticket.tickettitle}}</h2>
+                <p>{{ticket.ticketdesc}}</p>
+            </div>
+            <div class="col-md-4">
+                <h4>Applicable projects:</h4>
+                <ul>
+                    <li ng-repeat="projectId in ticket.projects">
+                        <span class="label label-info label-project"> {{projects.$getRecord(projectId).projectTitle}}</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<hr/>
+<div class="row">
+    <div class="col-md-12">
+        <!-- actions -->
+        <button ng-hide="ticket.read" class="btn btn-primary" ng-click="markRead(true)">Mark read</button>
+        <button ng-show="ticket.read" class="btn btn-default" ng-click="markRead(false)">Mark unread</button>
+        <button class="btn btn-success" ng-click="createAsset()">Create asset from ticket</button>
+        <button class="btn btn-danger" ng-click="showDecline=true">Reject</button>
+        <div ng-show="showDecline">
+            <hr/>
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    Reason for rejection
+                </div>
+                <div class="panel-body">
+                    <textarea class="form-control" rows="3" placeholder="Type reason here..." ng-model="declineReason"></textarea>
+                </div>
+                <div class="panel-footer">
+                    <button class="btn btn-primary" ng-click="declineAsset()">Reject</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>

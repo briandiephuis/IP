@@ -28,6 +28,7 @@ angular.module('tomTomApp')
                 u.$loaded(function() {
                     var ref2 = new Firebase(FBURL).child('people').child(u.peopleId);
                     $scope.userPerson = $firebase(ref2).$asObject();
+                    // console.log($scope.userPerson);
                 });
             }
         }

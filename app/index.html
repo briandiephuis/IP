@@ -46,8 +46,8 @@
                 <li ui-sref-active="active"><a href="#" ui-sref="planning.dashboard">Planning</a></li>
                 <li ui-sref-active="active"><a href="#" ui-sref="projects.dashboard">Projects</a></li>
                 <li ui-sref-active="active"><a href="#" ui-sref="people.dashboard">People</a></li>
-                <li class="divider"></li>
-                <li ui-sref-active="active"><a href="#" ui-sref="assets.dashboard">Assets</a></li>
+                <li class="divider" ng-show="userPerson.userId==='simplelogin:5'"></li>
+                <li ui-sref-active="active" ng-show="userPerson.userId==='simplelogin:5'"><a href="#" ui-sref="assets.dashboard">Assets</a></li>
             </ul>
             <ul class="nav navbar-top-links navbar-right" ng-controller="NavbarTopLinksCtrl">
                 <!-- messages -->
@@ -70,51 +70,6 @@
                         <li class="divider"></li>
                     </ul>
                 </li>
-<!-- 
-                        <li>
-                            <a href="#">
-                                <div>
-                                    <strong>John Smith</strong>
-                                    <span class="pull-right text-muted">
-                                        <em>Yesterday</em>
-                                    </span>
-                                </div>
-                                <div>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eleifend...</div>
-                            </a>
-                        </li>
-                        <li class="divider"></li>
-                        <li>
-                            <a href="#">
-                                <div>
-                                    <strong>John Smith</strong>
-                                    <span class="pull-right text-muted">
-                                        <em>Yesterday</em>
-                                    </span>
-                                </div>
-                                <div>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eleifend...</div>
-                            </a>
-                        </li>
-                        <li class="divider"></li>
-                        <li>
-                            <a href="#">
-                                <div>
-                                    <strong>John Smith</strong>
-                                    <span class="pull-right text-muted">
-                                        <em>Yesterday</em>
-                                    </span>
-                                </div>
-                                <div>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eleifend...</div>
-                            </a>
-                        </li>
-                        <li class="divider"></li>
-                        <li>
-                            <a class="text-center" href="#">
-                                <strong>Read All Messages</strong>
-                                <i class="fa fa-angle-right"></i>
-                            </a>
-                        </li>
-                    </ul>
- -->
                 <!-- alerts -->
 <!-- <li ng-show="user">
     <a class="dropdown-toggle" data-toggle="dropdown" href="#">
@@ -226,13 +181,15 @@
     <script src="scripts/services/companies.js"></script>
     <script src="scripts/controllers/assets/asset.js"></script>
     <script src="scripts/services/espacenet.js"></script>
-    <script src="scripts/controllers/tickets.js"></script>
+    <script src="scripts/controllers/planning/tickets.js"></script>
     <script src="scripts/services/tickets.js"></script>
     <script src="scripts/filters/lang.js"></script>
     <script src="scripts/filters/countrycode.js"></script>
     <script src="scripts/directives/addassettask.js"></script>
     <script src="scripts/directives/datepickerpopup.js"></script>
     <script src="scripts/filters/opentasks.js"></script>
+    <script src="scripts/controllers/planning/ticket.js"></script>
+    <script src="scripts/controllers/assets/create.js"></script>
     <!-- endbuild -->
 </body>
 
